@@ -324,6 +324,7 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 			linebot.NewCarouselColumn(
 				imageURLGlobal, "產學合作 - 營運系統智能化模型建置", "與全球快遞公司合作，解決公司騎士資源調度問題。",
 				linebot.NewPostbackAction("作品介紹", "全球營運系統智能化", "", "全球營運系統智能化 專案介紹"),
+				linebot.NewURIAction("github 連結", "https://github.com/sherry186"),
 			),
 		)
 		if _, err := app.bot.ReplyMessage(
