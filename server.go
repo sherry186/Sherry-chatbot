@@ -239,6 +239,20 @@ React native, MongoDB, GraphQL`); err != nil {
 				}
 			}
 
+			if data == "全球營運系統智能化" {
+				if err := app.replyText(event.ReplyToken, `🌟專案簡介
+此專案與全球快遞公司合作，解決公司騎士資源調度問題
+
+🌟重點項目
+· 利用 Python sklearn 套件跑複回歸模型分析(lasso, ridge) ，抓取重要變數
+· 利用 Python matplotlib 套件進行敘述統計
+
+🌟使用技術
+Python sklearn, matplotlib, Lasso and Ridge regression`); err != nil {
+					log.Print(err)
+				}
+			}
+
 		case linebot.EventTypeBeacon:
 			if err := app.replyText(event.ReplyToken, "Got beacon: "+event.Beacon.Hwid); err != nil {
 				log.Print(err)
@@ -295,6 +309,7 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 	case "作品集":
 		imageURLDormy := app.appBaseURL + "/static/projects/dormy.png"
 		imageURLPathfinder := app.appBaseURL + "/static/projects/pathfinder.png"
+		imageURLGlobal := app.appBaseURL + "/static/projects/globalDelivery.png"
 		template := linebot.NewCarouselTemplate(
 			linebot.NewCarouselColumn(
 				imageURLDormy, "Dormy 你的宿舍生活好幫手", "Dormy 你的宿舍好幫手是一個媒合住宿需求與願意提供協助方的任務媒合平台。",
@@ -305,6 +320,10 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 				imageURLPathfinder, "Pathfinder 與您探索無限可能", " Pathfinder是一個專屬於高中生紀錄學習歷程與進行生涯探索的App。",
 				linebot.NewPostbackAction("作品介紹", "Pathfinder", "", "Pathfinder 作品介紹"),
 				linebot.NewURIAction("github 連結", "https://github.com/sherry186/Pathfinder"),
+			),
+			linebot.NewCarouselColumn(
+				imageURLGlobal, "產學合作 - 營運系統智能化模型建置", "與全球快遞公司合作，解決公司騎士資源調度問題。",
+				linebot.NewPostbackAction("作品介紹", "全球營運系統智能化", "", "全球營運系統智能化 專案介紹"),
 			),
 		)
 		if _, err := app.bot.ReplyMessage(
