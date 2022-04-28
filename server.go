@@ -50,7 +50,7 @@ func main() {
 				Bounds: linebot.RichMenuBounds{X: 0, Y: 0, Width: 2500, Height: 843},
 				Action: linebot.RichMenuAction{
 					Type: linebot.RichMenuActionTypeMessage,
-					Text: "履歷",
+					Text: "作品集",
 				},
 			},
 			{
@@ -58,14 +58,14 @@ func main() {
 				Action: linebot.RichMenuAction{
 					Type: linebot.RichMenuActionTypeURI,
 					URI:  "https://github.com/sherry186",
-					Text: "click me",
+					Text: "github",
 				},
 			},
 			{
 				Bounds: linebot.RichMenuBounds{X: 833, Y: 843, Width: 834, Height: 843},
 				Action: linebot.RichMenuAction{
 					Type: linebot.RichMenuActionTypeMessage,
-					Text: "作品集",
+					Text: "履歷",
 				},
 			},
 			{
