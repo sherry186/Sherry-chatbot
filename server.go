@@ -267,6 +267,21 @@ Python sklearn, random forest, svm, knn, naive bayes`); err != nil {
 				}
 			}
 
+			if data == "Docker" {
+				if err := app.replyText(event.ReplyToken, `🌟🌟專案簡介
+利用 docker 技術搭建 client 及 server 的 container 環境完成連線
+
+🌟重點項目
+· 利用官方 Python Image建立 client 及 server 的 docker container
+· 使用 docker volume 將 server 傳送結果掛載至實體檔案路徑
+· 使用 docker compose 同時開啟 client 及 server 的服務
+
+🌟使用技術
+Docker`); err != nil {
+					log.Print(err)
+				}
+			}
+
 		case linebot.EventTypeBeacon:
 			if err := app.replyText(event.ReplyToken, "Got beacon: "+event.Beacon.Hwid); err != nil {
 				log.Print(err)
@@ -325,6 +340,7 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 		imageURLPathfinder := app.appBaseURL + "/static/projects/pathfinder.png"
 		imageURLGlobal := app.appBaseURL + "/static/projects/globalDelivery.png"
 		imageURLFinance := app.appBaseURL + "/static/projects/finance.png"
+		imageURLDocker := app.appBaseURL + "/static/projects/docker.png"
 		template := linebot.NewCarouselTemplate(
 			linebot.NewCarouselColumn(
 				imageURLDormy, "Dormy 你的宿舍生活好幫手", "Dormy 你的宿舍好幫手是一個媒合住宿需求與願意提供協助方的任務媒合平台。",
@@ -335,6 +351,11 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 				imageURLPathfinder, "Pathfinder 與您探索無限可能", " Pathfinder是一個專屬於高中生紀錄學習歷程與進行生涯探索的App。",
 				linebot.NewPostbackAction("作品介紹", "Pathfinder", "", "Pathfinder 作品介紹"),
 				linebot.NewURIAction("github 連結", "https://github.com/sherry186/Pathfinder"),
+			),
+			linebot.NewCarouselColumn(
+				imageURLDocker, "DOCKER PROJECT: CLIENT-SERVER連線", "利用 Docker 技術建立 client server 連線。",
+				linebot.NewPostbackAction("作品介紹", "Docker", "", "DOCKER CLIENT-SERVER連線 作品介紹"),
+				linebot.NewURIAction("github 連結", "https://github.com/sherry186/Distributed-Systems-Container-Practice"),
 			),
 			linebot.NewCarouselColumn(
 				imageURLGlobal, "產學合作 - 營運系統智能化模型建置", "與全球快遞公司合作，解決公司騎士資源調度問題。",
