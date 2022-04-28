@@ -207,9 +207,25 @@ func (app *KitchenSink) Callback(w http.ResponseWriter, r *http.Request) {
 			if data == "DATE" || data == "TIME" || data == "DATETIME" {
 				data += fmt.Sprintf("(%v)", *event.Postback.Params)
 			}
-			if err := app.replyText(event.ReplyToken, "Got postback: "+data); err != nil {
-				log.Print(err)
+
+			if data == "Dormy" {
+				if err := app.replyText(event.ReplyToken, `🌟專案簡介
+					Dormy 你的宿舍好幫手是一個媒合住宿需求與願意提供協助方的任務媒合平台。需求方可以透過平台刊登任務，供給方則能透過平台查看所有刊登中的任務，並針對能提供協助的任務發起應徵，等待需求方接受應徵。
+
+					🌟重點項目
+					· 利用 Python FastAPI開發後端 RestfulAPI
+					· 使用SQLAlchemy ORM 技術串聯 PostgreSQL
+					· 設計關聯式資料庫 DB Schema
+
+					🌟使用技術
+					Python, Sql ORM, Restful api`); err != nil {
+					log.Print(err)
+				}
 			}
+
+			// if err := app.replyText(event.ReplyToken, "Got postback: "+data); err != nil {
+			// 	log.Print(err)
+			// }
 		case linebot.EventTypeBeacon:
 			if err := app.replyText(event.ReplyToken, "Got beacon: "+event.Beacon.Hwid); err != nil {
 				log.Print(err)
@@ -268,7 +284,7 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 		template := linebot.NewCarouselTemplate(
 			linebot.NewCarouselColumn(
 				imageURL, "Dormy 你的宿舍生活好幫手", "Dormy 你的宿舍好幫手是一個媒合住宿需求與願意提供協助方的任務媒合平台。",
-				linebot.NewURIAction("github 連結", "https://line.me"),
+				linebot.NewURIAction("github 連結", "https://github.com/sherry186/Dorm_Service"),
 				linebot.NewPostbackAction("作品介紹", "Dormy", "", "Dormy 作品介紹"),
 			),
 			linebot.NewCarouselColumn(
