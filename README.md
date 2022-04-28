@@ -1,3 +1,6 @@
+<img src="https://user-images.githubusercontent.com/71546959/165785428-9b17635d-8cee-4b20-9e1a-acb3665d069b.jpg" width="200">
+
+
 # Sherry-chatbot
 A line chatbot written in Golang that is all about me!
 
