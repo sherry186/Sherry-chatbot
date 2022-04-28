@@ -50,7 +50,7 @@ func main() {
 				Bounds: linebot.RichMenuBounds{X: 0, Y: 0, Width: 2500, Height: 843},
 				Action: linebot.RichMenuAction{
 					Type: linebot.RichMenuActionTypeMessage,
-					Text: "resume",
+					Text: "履歷",
 				},
 			},
 			{
@@ -253,7 +253,7 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 		).Do(); err != nil {
 			return err
 		}
-	case "resume":
+	case "履歷":
 		page1URL := app.appBaseURL + "/static/resume/sherry_resume_page1.jpg"
 		page2URL := app.appBaseURL + "/static/resume/sherry_resume_page2.jpg"
 		if _, err := app.bot.ReplyMessage(
