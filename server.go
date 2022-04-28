@@ -24,10 +24,12 @@ import (
 	"os/exec"
 	"path/filepath"
 
+	"github.com/joho/godotenv"
 	"github.com/line/line-bot-sdk-go/v7/linebot"
 )
 
 func main() {
+	godotenv.Load()
 	app, err := NewKitchenSink(
 		os.Getenv("CHANNEL_SECRET"),
 		os.Getenv("CHANNEL_TOKEN"),
