@@ -238,14 +238,14 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 		} else {
 			return app.replyText(replyToken, "Bot can't use profile API without user ID")
 		}
-	case "buttons":
+	case "個人介紹":
 		imageURL := app.appBaseURL + "/static/buttons/avatar.jpg"
 		template := linebot.NewButtonsTemplate(
 			imageURL, "關於 Sherry", "大家好，我是 Sherry 葉小漓，目前就讀台大資管系大三，未來希望能當一名軟體工程師。請多指教！",
-			linebot.NewMessageAction("了解更多", "test"),
-			linebot.NewMessageAction("我的電話", "0909100476"),
-			linebot.NewMessageAction("我的 email", "hsiaoliy@gmail.com"),
-			linebot.NewURIAction("我的 facebook", "https://www.facebook.com/hsiaoli.yeh.1/"),
+			linebot.NewMessageAction("了解更多", "了解更多"),
+			linebot.NewMessageAction("Sherry 的電話", "Sherry 的電話"),
+			linebot.NewMessageAction("Sherry 的 email", "Sherry 的 email"),
+			linebot.NewURIAction("Sherry 的 facebook", "https://www.facebook.com/hsiaoli.yeh.1/"),
 		)
 		if _, err := app.bot.ReplyMessage(
 			replyToken,
@@ -283,6 +283,21 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 		).Do(); err != nil {
 			return err
 		}
+	case "Sherry 的電話":
+		if err := app.replyText(replyToken, "0909100476"); err != nil {
+			log.Print(err)
+		}
+
+	case "Sherry 的 email":
+		if err := app.replyText(replyToken, "hsiaoliy@gmail.com"); err != nil {
+			log.Print(err)
+		}
+
+	case "了解更多":
+		if err := app.replyText(replyToken, "more about sherry"); err != nil {
+			log.Print(err)
+		}
+
 	case "flex carousel":
 		// {
 		//   "type": "carousel",
