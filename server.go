@@ -183,9 +183,9 @@ func (app *KitchenSink) Callback(w http.ResponseWriter, r *http.Request) {
 				log.Printf("Unknown message: %v", message)
 			}
 		case linebot.EventTypeFollow:
-			if err := app.replyText(event.ReplyToken, "Got followed event"); err != nil {
-				log.Print(err)
-			}
+			// if err := app.replyText(event.ReplyToken, "Got followed event"); err != nil {
+			// 	log.Print(err)
+			// }
 		case linebot.EventTypeUnfollow:
 			log.Printf("Unfollowed this bot: %v", event)
 		case linebot.EventTypeJoin:
