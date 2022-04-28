@@ -65,14 +65,14 @@ func main() {
 				Bounds: linebot.RichMenuBounds{X: 833, Y: 843, Width: 834, Height: 843},
 				Action: linebot.RichMenuAction{
 					Type: linebot.RichMenuActionTypeMessage,
-					Text: "side projects",
+					Text: "作品集",
 				},
 			},
 			{
 				Bounds: linebot.RichMenuBounds{X: 1667, Y: 843, Width: 833, Height: 843},
 				Action: linebot.RichMenuAction{
 					Type: linebot.RichMenuActionTypeMessage,
-					Text: "about me",
+					Text: "個人介紹",
 				},
 			},
 		},
@@ -264,12 +264,12 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 			return err
 		}
 	case "作品集":
-		imageURL := app.appBaseURL + "/static/buttons/avatar.jpg"
+		imageURL := app.appBaseURL + "/static/projects/dormy.png"
 		template := linebot.NewCarouselTemplate(
 			linebot.NewCarouselColumn(
-				imageURL, "hoge", "fuga",
-				linebot.NewURIAction("Go to line.me", "https://line.me"),
-				linebot.NewPostbackAction("Say hello1", "hello こんにちは", "", ""),
+				imageURL, "Dormy 你的宿舍生活好幫手", "Dormy 你的宿舍好幫手是一個媒合住宿需求與願意提供協助方的任務媒合平台。需求方可以透過平台刊登任務，供給方則能透過平台查看所有刊登中的任務，並針對能提供協助的任務發起應徵，等待需求方接受應徵。",
+				linebot.NewURIAction("github 連結", "https://line.me"),
+				linebot.NewPostbackAction("作品介紹", "Dormy", "", "Dormy 作品介紹"),
 			),
 			linebot.NewCarouselColumn(
 				imageURL, "hoge", "fuga",
