@@ -253,6 +253,20 @@ Python sklearn, matplotlib, Lasso and Ridge regression`); err != nil {
 				}
 			}
 
+			if data == "Classification" {
+				if err := app.replyText(event.ReplyToken, `🌟專案簡介
+分析 2019-2021 的股票漲跌趨勢，建立分類模型進行漲跌預測。
+
+🌟重點項目
+· 利用 Python Sklearn 套件跑 Naive Bayes, Decision Tree, Random Forest, KNN, SVM 等分類器模型，挑出準確率最高者進行新聞漲停及跌停分類
+· 根據 Precision, Recall 及 F1 等指標，針對不同風險接受程度投資者客製化分類模型
+
+🌟使用技術
+Python sklearn, random forest, svm, knn, naive bayes`); err != nil {
+					log.Print(err)
+				}
+			}
+
 		case linebot.EventTypeBeacon:
 			if err := app.replyText(event.ReplyToken, "Got beacon: "+event.Beacon.Hwid); err != nil {
 				log.Print(err)
@@ -310,6 +324,7 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 		imageURLDormy := app.appBaseURL + "/static/projects/dormy.png"
 		imageURLPathfinder := app.appBaseURL + "/static/projects/pathfinder.png"
 		imageURLGlobal := app.appBaseURL + "/static/projects/globalDelivery.png"
+		imageURLFinance := app.appBaseURL + "/static/projects/finance.png"
 		template := linebot.NewCarouselTemplate(
 			linebot.NewCarouselColumn(
 				imageURLDormy, "Dormy 你的宿舍生活好幫手", "Dormy 你的宿舍好幫手是一個媒合住宿需求與願意提供協助方的任務媒合平台。",
@@ -324,7 +339,12 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 			linebot.NewCarouselColumn(
 				imageURLGlobal, "產學合作 - 營運系統智能化模型建置", "與全球快遞公司合作，解決公司騎士資源調度問題。",
 				linebot.NewPostbackAction("作品介紹", "全球營運系統智能化", "", "全球營運系統智能化 專案介紹"),
-				linebot.NewURIAction("github 連結", "https://github.com/sherry186"),
+				linebot.NewURIAction("尚無作品連結，將導引至個人 github", "https://github.com/sherry186"),
+			),
+			linebot.NewCarouselColumn(
+				imageURLFinance, "財經新聞漲停及跌停文件分類", "分析 2019-2021 的股票漲跌趨勢，建立分類模型進行漲跌預測。",
+				linebot.NewPostbackAction("作品介紹", "Classification", "", "財經新聞漲停及跌停文件分類 作品介紹"),
+				linebot.NewURIAction("尚無作品連結，將導引至個人 github", "https://github.com/sherry186"),
 			),
 		)
 		if _, err := app.bot.ReplyMessage(
