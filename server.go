@@ -239,13 +239,13 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 			return app.replyText(replyToken, "Bot can't use profile API without user ID")
 		}
 	case "buttons":
-		imageURL := app.appBaseURL + "/static/buttons/1040.jpg"
+		imageURL := app.appBaseURL + "/static/buttons/avatar.jpg"
 		template := linebot.NewButtonsTemplate(
-			imageURL, "My button sample", "Hello, my button",
-			linebot.NewURIAction("Go to line.me", "https://line.me"),
-			linebot.NewPostbackAction("Say hello1", "hello こんにちは", "", "hello こんにちは"),
-			linebot.NewPostbackAction("言 hello2", "hello こんにちは", "hello こんにちは", ""),
-			linebot.NewMessageAction("Say message", "Rice=米"),
+			imageURL, "關於 Sherry", "大家好， 我是 Sherry 葉小漓，也可以叫我小漓。目前就讀台大資管系大三，未來希望能當一名軟體工程師。請多指教！點擊下方了解更多👇🏻",
+			linebot.NewMessageAction("了解更多", "test"),
+			linebot.NewMessageAction("我的電話", "0909100476"),
+			linebot.NewMessageAction("我的 email", "hsiaoliy@gmail.com"),
+			linebot.NewURIAction("我的 facebook", "https://www.facebook.com/hsiaoli.yeh.1/"),
 		)
 		if _, err := app.bot.ReplyMessage(
 			replyToken,
@@ -264,7 +264,7 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 			return err
 		}
 	case "作品集":
-		imageURL := app.appBaseURL + "/static/buttons/1040.jpg"
+		imageURL := app.appBaseURL + "/static/buttons/avatar.jpg"
 		template := linebot.NewCarouselTemplate(
 			linebot.NewCarouselColumn(
 				imageURL, "hoge", "fuga",
@@ -280,60 +280,6 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 		if _, err := app.bot.ReplyMessage(
 			replyToken,
 			linebot.NewTemplateMessage("Carousel alt text", template),
-		).Do(); err != nil {
-			return err
-		}
-	case "datetime":
-		template := linebot.NewButtonsTemplate(
-			"", "", "Select date / time !",
-			linebot.NewDatetimePickerAction("date", "DATE", "date", "", "", ""),
-			linebot.NewDatetimePickerAction("time", "TIME", "time", "", "", ""),
-			linebot.NewDatetimePickerAction("datetime", "DATETIME", "datetime", "", "", ""),
-		)
-		if _, err := app.bot.ReplyMessage(
-			replyToken,
-			linebot.NewTemplateMessage("Datetime pickers alt text", template),
-		).Do(); err != nil {
-			return err
-		}
-	case "flex":
-		// {
-		//   "type": "bubble",
-		//   "body": {
-		//     "type": "box",
-		//     "layout": "horizontal",
-		//     "contents": [
-		//       {
-		//         "type": "text",
-		//         "text": "Hello,"
-		//       },
-		//       {
-		//         "type": "text",
-		//         "text": "World!"
-		//       }
-		//     ]
-		//   }
-		// }
-		contents := &linebot.BubbleContainer{
-			Type: linebot.FlexContainerTypeBubble,
-			Body: &linebot.BoxComponent{
-				Type:   linebot.FlexComponentTypeBox,
-				Layout: linebot.FlexBoxLayoutTypeHorizontal,
-				Contents: []linebot.FlexComponent{
-					&linebot.TextComponent{
-						Type: linebot.FlexComponentTypeText,
-						Text: "Hello,",
-					},
-					&linebot.TextComponent{
-						Type: linebot.FlexComponentTypeText,
-						Text: "World!",
-					},
-				},
-			},
-		}
-		if _, err := app.bot.ReplyMessage(
-			replyToken,
-			linebot.NewFlexMessage("Flex message alt text", contents),
 		).Do(); err != nil {
 			return err
 		}
