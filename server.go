@@ -340,7 +340,7 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 		imageURLPathfinder := app.appBaseURL + "/static/projects/pathfinder.png"
 		imageURLGlobal := app.appBaseURL + "/static/projects/globalDelivery.png"
 		imageURLFinance := app.appBaseURL + "/static/projects/finance.png"
-		imageURLDocker := app.appBaseURL + "/static/projects/docker.png"
+		imageURLDocker := app.appBaseURL + "/static/projects/docker.jpg"
 		template := linebot.NewCarouselTemplate(
 			linebot.NewCarouselColumn(
 				imageURLDormy, "Dormy 你的宿舍生活好幫手", "Dormy 你的宿舍好幫手是一個媒合住宿需求與願意提供協助方的任務媒合平台。",
