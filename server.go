@@ -331,11 +331,11 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 		template := linebot.NewImageCarouselTemplate(
 			linebot.NewImageCarouselColumn(
 				page1URL,
-				linebot.NewURIAction("View on Drive", "https://drive.google.com/file/d/1S-czYOxV9Nce8rMGPStbrOh2n48AhIlE/view?usp=sharing"),
+				linebot.NewURIAction("Google Drive", "https://drive.google.com/file/d/1S-czYOxV9Nce8rMGPStbrOh2n48AhIlE/view?usp=sharing"),
 			),
 			linebot.NewImageCarouselColumn(
 				page2URL,
-				linebot.NewURIAction("View on Drive", "https://drive.google.com/file/d/1S-czYOxV9Nce8rMGPStbrOh2n48AhIlE/view?usp=sharing"),
+				linebot.NewURIAction("Google Drive", "https://drive.google.com/file/d/1S-czYOxV9Nce8rMGPStbrOh2n48AhIlE/view?usp=sharing"),
 			),
 		)
 		if _, err := app.bot.ReplyMessage(
