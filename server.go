@@ -268,7 +268,7 @@ Python sklearn, random forest, svm, knn, naive bayes`); err != nil {
 			}
 
 			if data == "Docker" {
-				if err := app.replyText(event.ReplyToken, `🌟🌟專案簡介
+				if err := app.replyText(event.ReplyToken, `🌟專案簡介
 利用 docker 技術搭建 client 及 server 的 container 環境完成連線
 
 🌟重點項目
@@ -328,13 +328,32 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 	case "履歷":
 		page1URL := app.appBaseURL + "/static/resume/sherry_resume_page1.jpg"
 		page2URL := app.appBaseURL + "/static/resume/sherry_resume_page2.jpg"
+		template := linebot.NewImageCarouselTemplate(
+			linebot.NewImageCarouselColumn(
+				page1URL,
+				linebot.NewURIAction("View on Drive", "https://drive.google.com/file/d/1S-czYOxV9Nce8rMGPStbrOh2n48AhIlE/view?usp=sharing"),
+			),
+			linebot.NewImageCarouselColumn(
+				page2URL,
+				linebot.NewURIAction("View on Drive", "https://drive.google.com/file/d/1S-czYOxV9Nce8rMGPStbrOh2n48AhIlE/view?usp=sharing"),
+			),
+		)
 		if _, err := app.bot.ReplyMessage(
 			replyToken,
-			linebot.NewImageMessage(page1URL, page1URL),
-			linebot.NewImageMessage(page2URL, page2URL),
+			linebot.NewTemplateMessage("Image carousel alt text", template),
 		).Do(); err != nil {
 			return err
 		}
+
+		// page1URL := app.appBaseURL + "/static/resume/sherry_resume_page1.jpg"
+		// page2URL := app.appBaseURL + "/static/resume/sherry_resume_page2.jpg"
+		// if _, err := app.bot.ReplyMessage(
+		// 	replyToken,
+		// 	linebot.NewImageMessage(page1URL, page1URL),
+		// 	linebot.NewImageMessage(page2URL, page2URL),
+		// ).Do(); err != nil {
+		// 	return err
+		// }
 	case "作品集":
 		imageURLDormy := app.appBaseURL + "/static/projects/dormy.png"
 		imageURLPathfinder := app.appBaseURL + "/static/projects/pathfinder.png"
