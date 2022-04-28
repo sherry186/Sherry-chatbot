@@ -241,7 +241,7 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 	case "buttons":
 		imageURL := app.appBaseURL + "/static/buttons/avatar.jpg"
 		template := linebot.NewButtonsTemplate(
-			imageURL, "關於 Sherry", "大家好， 我是 Sherry 葉小漓，也可以叫我小漓。目前就讀台大資管系大三，未來希望能當一名軟體工程師。請多指教！點擊下方了解更多👇🏻",
+			imageURL, "關於 Sherry", "大家好，我是 Sherry 葉小漓，目前就讀台大資管系大三，未來希望能當一名軟體工程師。請多指教！",
 			linebot.NewMessageAction("了解更多", "test"),
 			linebot.NewMessageAction("我的電話", "0909100476"),
 			linebot.NewMessageAction("我的 email", "hsiaoliy@gmail.com"),
