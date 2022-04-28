@@ -253,19 +253,16 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 		).Do(); err != nil {
 			return err
 		}
-	case "confirm":
-		template := linebot.NewConfirmTemplate(
-			"Do it?",
-			linebot.NewMessageAction("Yes", "Yes!"),
-			linebot.NewMessageAction("No", "No!"),
-		)
+	case "履歷":
+		imageURL := app.appBaseURL + "/static/resume/sherry_resume_page1.jpg"
+		// imageArray := [2]*linebot.ImageMessage{linebot.NewImageMessage(imageURL, imageURL), linebot.NewImageMessage(imageURL, imageURL)}
 		if _, err := app.bot.ReplyMessage(
 			replyToken,
-			linebot.NewTemplateMessage("Confirm alt text", template),
+			linebot.NewImageMessage(imageURL, imageURL),
 		).Do(); err != nil {
 			return err
 		}
-	case "carousel":
+	case "作品集":
 		imageURL := app.appBaseURL + "/static/buttons/1040.jpg"
 		template := linebot.NewCarouselTemplate(
 			linebot.NewCarouselColumn(
