@@ -259,55 +259,27 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 		if _, err := app.bot.ReplyMessage(
 			replyToken,
 			linebot.NewImageMessage(page1URL, page1URL),
-		).Do(); err != nil {
-			return err
-		}
-		if _, err := app.bot.ReplyMessage(
-			replyToken,
 			linebot.NewImageMessage(page2URL, page2URL),
 		).Do(); err != nil {
 			return err
 		}
 	case "作品集":
-		page1URL := app.appBaseURL + "/static/resume/sherry_resume_page1.jpg"
-		page2URL := app.appBaseURL + "/static/resume/sherry_resume_page2.jpg"
+		imageURL := app.appBaseURL + "/static/buttons/1040.jpg"
 		template := linebot.NewCarouselTemplate(
 			linebot.NewCarouselColumn(
-				page1URL, "resume1", "resume1",
+				imageURL, "hoge", "fuga",
+				linebot.NewURIAction("Go to line.me", "https://line.me"),
+				linebot.NewPostbackAction("Say hello1", "hello こんにちは", "", ""),
 			),
 			linebot.NewCarouselColumn(
-				page2URL, "resume2", "resume2",
+				imageURL, "hoge", "fuga",
+				linebot.NewPostbackAction("言 hello2", "hello こんにちは", "hello こんにちは", ""),
+				linebot.NewMessageAction("Say message", "Rice=米"),
 			),
 		)
 		if _, err := app.bot.ReplyMessage(
 			replyToken,
 			linebot.NewTemplateMessage("Carousel alt text", template),
-		).Do(); err != nil {
-			return err
-		}
-	case "履歷":
-		imageURL := app.appBaseURL + "/static/buttons/1040.jpg"
-		template := linebot.NewImageCarouselTemplate(
-			linebot.NewImageCarouselColumn(
-				imageURL,
-				linebot.NewURIAction("Go to LINE", "https://line.me"),
-			),
-			linebot.NewImageCarouselColumn(
-				imageURL,
-				linebot.NewPostbackAction("Say hello1", "hello こんにちは", "", ""),
-			),
-			linebot.NewImageCarouselColumn(
-				imageURL,
-				linebot.NewMessageAction("Say message", "Rice=米"),
-			),
-			linebot.NewImageCarouselColumn(
-				imageURL,
-				linebot.NewDatetimePickerAction("datetime", "DATETIME", "datetime", "", "", ""),
-			),
-		)
-		if _, err := app.bot.ReplyMessage(
-			replyToken,
-			linebot.NewTemplateMessage("Image carousel alt text", template),
 		).Do(); err != nil {
 			return err
 		}
