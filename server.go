@@ -339,12 +339,12 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 			linebot.NewCarouselColumn(
 				imageURLGlobal, "產學合作 - 營運系統智能化模型建置", "與全球快遞公司合作，解決公司騎士資源調度問題。",
 				linebot.NewPostbackAction("作品介紹", "全球營運系統智能化", "", "全球營運系統智能化 專案介紹"),
-				linebot.NewURIAction("尚無作品連結，將導引至個人 github", "https://github.com/sherry186"),
+				linebot.NewURIAction("尚無連結，導引至個人 github", "https://github.com/sherry186"),
 			),
 			linebot.NewCarouselColumn(
 				imageURLFinance, "財經新聞漲停及跌停文件分類", "分析 2019-2021 的股票漲跌趨勢，建立分類模型進行漲跌預測。",
 				linebot.NewPostbackAction("作品介紹", "Classification", "", "財經新聞漲停及跌停文件分類 作品介紹"),
-				linebot.NewURIAction("尚無作品連結，將導引至個人 github", "https://github.com/sherry186"),
+				linebot.NewURIAction("尚無連結，導引至個人 github", "https://github.com/sherry186"),
 			),
 		)
 		if _, err := app.bot.ReplyMessage(
@@ -364,7 +364,14 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 		}
 
 	case "了解更多":
-		if err := app.replyText(replyToken, "more about sherry"); err != nil {
+		if err := app.replyText(replyToken, `我是葉小漓，來自新北市。父親是香港中文大學財金系教授，因此十歲以前就讀香港的國際學校。高中時就讀北一女中數理資優班，當時跟著台大資訊系廖世偉教授作區塊鏈相關的專題研究，過程中設計出一個以區塊鏈為底層技術的藥品供應鏈系統，並獲得台北市科展優等獎。
+
+大學就讀台大資管系，修習系上資料結構與演算法、作業系統、資料庫管理、網路技術與應用等必修課程，以及分散式系統、大數據與商業分析等選修課程。豐富的修課經驗使我累積堅實的資訊底子，也培養我的程式能力以及實作經驗。我接觸過的程式語言有 Python、Javascript、C++、Go，曾用 Python 架設後端系統以及進行數據分析、訓練模型以及使用Javascript 及 React.js 建立前端系統等等。另外，也有運用過 Docker 技術打造 container 環境、並且操作過 aws 平台。對我而言，程式是一個達成目標的工具，若有需求，就努力學習並運用。
+
+課程之餘，我也有在新創公司擔任前端工程師，熟悉 git 版本控制流程、以及學習與多個不同角色溝協作。而在此過程中也發現，比起做切版及畫面顯示等工作，我對於系統的穩定性與安全性設計更感興趣。
+
+未來在工作上，我希望能夠發揮自己的技術專長，為社會貢獻一己之力。「取之於社會、回饋於社會」是我認同的理念，期許自己在未來能夠發揮正面的影響力！
+`); err != nil {
 			log.Print(err)
 		}
 
