@@ -39,6 +39,60 @@ func main() {
 		log.Fatal(err)
 	}
 
+	// create rich menu
+	richMenu := linebot.RichMenu{
+		Size:        linebot.RichMenuSize{Width: 2500, Height: 1686},
+		Selected:    false,
+		Name:        "Menu1",
+		ChatBarText: "ChatText",
+		Areas: []linebot.AreaDetail{
+			{
+				Bounds: linebot.RichMenuBounds{X: 0, Y: 0, Width: 2500, Height: 843},
+				Action: linebot.RichMenuAction{
+					Type: linebot.RichMenuActionTypeMessage,
+					Text: "resume",
+				},
+			},
+			{
+				Bounds: linebot.RichMenuBounds{X: 0, Y: 843, Width: 833, Height: 843},
+				Action: linebot.RichMenuAction{
+					Type: linebot.RichMenuActionTypeURI,
+					URI:  "https://github.com/sherry186",
+					Text: "click me",
+				},
+			},
+			{
+				Bounds: linebot.RichMenuBounds{X: 833, Y: 843, Width: 834, Height: 843},
+				Action: linebot.RichMenuAction{
+					Type: linebot.RichMenuActionTypeMessage,
+					Text: "side projects",
+				},
+			},
+			{
+				Bounds: linebot.RichMenuBounds{X: 1667, Y: 843, Width: 833, Height: 843},
+				Action: linebot.RichMenuAction{
+					Type: linebot.RichMenuActionTypeMessage,
+					Text: "about me",
+				},
+			},
+		},
+	}
+	res, err := app.bot.CreateRichMenu(richMenu).Do()
+	if err != nil {
+		log.Fatal(err)
+	}
+	log.Println(res.RichMenuID)
+
+	// upload richmenu
+	if _, err = app.bot.UploadRichMenuImage(res.RichMenuID, "./static/richmenu/richmenu.jpg").Do(); err != nil {
+		log.Fatal(err)
+	}
+
+	// set default rich menu
+	if _, err = app.bot.SetDefaultRichMenu(res.RichMenuID).Do(); err != nil {
+		log.Fatal(err)
+	}
+
 	// serve /static/** files
 	staticFileServer := http.FileServer(http.Dir("static"))
 	http.HandleFunc("/static/", http.StripPrefix("/static/", staticFileServer).ServeHTTP)
