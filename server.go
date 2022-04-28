@@ -42,9 +42,9 @@ func main() {
 	// create rich menu
 	richMenu := linebot.RichMenu{
 		Size:        linebot.RichMenuSize{Width: 2500, Height: 1686},
-		Selected:    false,
+		Selected:    true,
 		Name:        "Menu1",
-		ChatBarText: "ChatText",
+		ChatBarText: "Learn More About Me ><!!!",
 		Areas: []linebot.AreaDetail{
 			{
 				Bounds: linebot.RichMenuBounds{X: 0, Y: 0, Width: 2500, Height: 843},
