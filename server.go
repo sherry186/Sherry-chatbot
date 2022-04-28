@@ -254,11 +254,17 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 			return err
 		}
 	case "履歷":
-		imageURL := app.appBaseURL + "/static/resume/sherry_resume_page1.jpg"
-		// imageArray := [2]*linebot.ImageMessage{linebot.NewImageMessage(imageURL, imageURL), linebot.NewImageMessage(imageURL, imageURL)}
+		page1URL := app.appBaseURL + "/static/resume/sherry_resume_page1.jpg"
+		page2URL := app.appBaseURL + "/static/resume/sherry_resume_page2.jpg"
 		if _, err := app.bot.ReplyMessage(
 			replyToken,
-			linebot.NewImageMessage(imageURL, imageURL),
+			linebot.NewImageMessage(page1URL, page1URL),
+		).Do(); err != nil {
+			return err
+		}
+		if _, err := app.bot.ReplyMessage(
+			replyToken,
+			linebot.NewImageMessage(page2URL, page2URL),
 		).Do(); err != nil {
 			return err
 		}
