@@ -58,7 +58,7 @@ func main() {
 				Action: linebot.RichMenuAction{
 					Type: linebot.RichMenuActionTypeURI,
 					URI:  "https://github.com/sherry186",
-					Text: "github",
+					Text: "Github",
 				},
 			},
 			{
@@ -321,7 +321,7 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 		)
 		if _, err := app.bot.ReplyMessage(
 			replyToken,
-			linebot.NewTemplateMessage("", template),
+			linebot.NewTemplateMessage("about me", template),
 		).Do(); err != nil {
 			return err
 		}
@@ -340,7 +340,7 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 		)
 		if _, err := app.bot.ReplyMessage(
 			replyToken,
-			linebot.NewTemplateMessage("", template),
+			linebot.NewTemplateMessage("resume", template),
 		).Do(); err != nil {
 			return err
 		}
@@ -389,7 +389,7 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 		)
 		if _, err := app.bot.ReplyMessage(
 			replyToken,
-			linebot.NewTemplateMessage("", template),
+			linebot.NewTemplateMessage("side projects", template),
 		).Do(); err != nil {
 			return err
 		}
@@ -480,7 +480,7 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 		}
 		if _, err := app.bot.ReplyMessage(
 			replyToken,
-			linebot.NewFlexMessage("", contents),
+			linebot.NewFlexMessage("Flex message alt text", contents),
 		).Do(); err != nil {
 			return err
 		}
@@ -653,7 +653,7 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 			replyToken,
 			linebot.NewImagemapMessage(
 				app.appBaseURL+"/static/rich",
-				"",
+				"Imagemap alt text",
 				linebot.ImagemapBaseSize{Width: 1040, Height: 1040},
 				linebot.NewURIImagemapAction("LINE Store Manga", "https://store.line.me/family/manga/en", linebot.ImagemapArea{X: 0, Y: 0, Width: 520, Height: 520}),
 				linebot.NewURIImagemapAction("LINE Store Music", "https://store.line.me/family/music/en", linebot.ImagemapArea{X: 520, Y: 0, Width: 520, Height: 520}),
