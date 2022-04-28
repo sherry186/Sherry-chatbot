@@ -223,9 +223,22 @@ Python, Sql ORM, Restful api`); err != nil {
 				}
 			}
 
-			// if err := app.replyText(event.ReplyToken, "Got postback: "+data); err != nil {
-			// 	log.Print(err)
-			// }
+			if data == "Pathfinder" {
+				if err := app.replyText(event.ReplyToken, `🌟專案簡介
+學習歷程為108課綱下，高中生升學準備的重要項目之一，旨在讓高中生記錄三年在學表現，並減輕學生在高中整理備審資料的負擔。然而，在經過調查問卷（799筆樣本）、深入訪談（14位受訪者）後，我們發現：「77.8%的同學不知道要怎麼規劃學習歷程檔案」，同學們在書寫學習歷程的總體規劃有關鍵問題尚待解決。為解決上述問題，我們設計了 Pathfinder，一個專屬於高中生學習歷程、生涯探索的App。立基於ColleGo!網站資料上，Pathfinder串接三大功能：紀錄面板、儀表分析板、探索活動板，以個人化推薦、整合性的功能為關鍵特色，旨在為使用者打造個別專屬的生涯探索之旅。
+
+🌟重點項目
+· 榮獲2021大專校院資訊應用服務創新競賽 資訊應用組 第二名
+· 入圍 2021 Reimagine Education Awards （華頓商院舉辦，錄取率 12%）
+· 設計系統架構，包含選定 MongoDB 後端資料庫、GraphQL API 以及 React Native 製做前端 App
+· 管理 Kanban 與 Scrum meeting，定期舉行 review meeting 統整團隊進度
+
+🌟使用技術
+React native, MongoDB, GraphQL`); err != nil {
+					log.Print(err)
+				}
+			}
+
 		case linebot.EventTypeBeacon:
 			if err := app.replyText(event.ReplyToken, "Got beacon: "+event.Beacon.Hwid); err != nil {
 				log.Print(err)
@@ -280,17 +293,18 @@ func (app *KitchenSink) handleText(message *linebot.TextMessage, replyToken stri
 			return err
 		}
 	case "作品集":
-		imageURL := app.appBaseURL + "/static/projects/dormy.png"
+		imageURLDormy := app.appBaseURL + "/static/projects/dormy.png"
+		imageURLPathfinder := app.appBaseURL + "/static/projects/pathfinder.png"
 		template := linebot.NewCarouselTemplate(
 			linebot.NewCarouselColumn(
-				imageURL, "Dormy 你的宿舍生活好幫手", "Dormy 你的宿舍好幫手是一個媒合住宿需求與願意提供協助方的任務媒合平台。",
-				linebot.NewURIAction("github 連結", "https://github.com/sherry186/Dorm_Service"),
+				imageURLDormy, "Dormy 你的宿舍生活好幫手", "Dormy 你的宿舍好幫手是一個媒合住宿需求與願意提供協助方的任務媒合平台。",
 				linebot.NewPostbackAction("作品介紹", "Dormy", "", "Dormy 作品介紹"),
+				linebot.NewURIAction("github 連結", "https://github.com/sherry186/Dorm_Service"),
 			),
 			linebot.NewCarouselColumn(
-				imageURL, "hoge", "fuga",
-				linebot.NewPostbackAction("言 hello2", "hello こんにちは", "hello こんにちは", ""),
-				linebot.NewMessageAction("Say message", "Rice=米"),
+				imageURLPathfinder, "Pathfinder 與您探索無限可能", " Pathfinder是一個專屬於高中生紀錄學習歷程與進行生涯探索的App。",
+				linebot.NewPostbackAction("作品介紹", "Pathfinder", "", "Pathfinder 作品介紹"),
+				linebot.NewURIAction("github 連結", "https://github.com/sherry186/Pathfinder"),
 			),
 		)
 		if _, err := app.bot.ReplyMessage(
